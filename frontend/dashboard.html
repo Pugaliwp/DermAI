@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Dashboard - DermAI Portal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <nav class="navbar">
+    <div class="container-fluid">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-notes-medical"></i></div>
+        <span>Derm<span style="color: var(--primary);">AI</span> Portal</span>
+      </a>
+
+      <div class="nav-actions" id="nav-actions">
+        <!-- Injected via auth.js -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main App Layout with Sidebar -->
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <ul class="sidebar-menu">
+        <li><a href="dashboard.html" class="sidebar-link active"><i class="fa-solid fa-chart-pie"></i> Dashboard Overview</a></li>
+        <li><a href="upload.html" class="sidebar-link"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Skin Scan</a></li>
+        <li><a href="history.html" class="sidebar-link"><i class="fa-solid fa-clock-rotate-left"></i> Screening History</a></li>
+        <li><a href="disease-info.html" class="sidebar-link"><i class="fa-solid fa-book-medical"></i> Disease Library</a></li>
+        <li><a href="profile.html" class="sidebar-link"><i class="fa-solid fa-user-gear"></i> Account Profile</a></li>
+      </ul>
+
+      <div style="margin-top: auto; padding-top: 1.5rem; border-top: 1px solid var(--slate-200);">
+        <a href="upload.html" class="btn btn-primary btn-block"><i class="fa-solid fa-plus"></i> New Scan</a>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <div class="dashboard-header">
+        <div>
+          <h1 style="font-size: 1.8rem;">Welcome back, <span id="user-welcome-name">User</span>!</h1>
+          <p style="color: var(--slate-500); font-size: 0.95rem;">Here is your personal skin telemetry and screening summary.</p>
+        </div>
+        <a href="upload.html" class="btn btn-primary"><i class="fa-solid fa-camera"></i> Upload Skin Image</a>
+      </div>
+
+      <!-- Educational Disclaimer Alert -->
+      <div class="disclaimer-banner" style="margin-top: 0;">
+        <div class="disclaimer-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <div class="disclaimer-text">
+          <strong>Medical Notice:</strong>
+          This portal provides preliminary AI image telemetry for educational purposes. Always consult a certified dermatologist for clinical diagnosis.
+        </div>
+      </div>
+
+      <!-- Metric Cards Grid -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-info">
+            <p>Total Screenings</p>
+            <h2 id="total-screenings-count">0</h2>
+          </div>
+          <div class="metric-icon blue"><i class="fa-solid fa-file-medical"></i></div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-info">
+            <p>Recent Prediction</p>
+            <h2 id="recent-disease-name" style="font-size: 1.3rem;">Loading...</h2>
+          </div>
+          <div class="metric-icon teal"><i class="fa-solid fa-microscope"></i></div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-info">
+            <p>Confidence Level</p>
+            <h2 id="recent-confidence">--</h2>
+          </div>
+          <div class="metric-icon amber"><i class="fa-solid fa-gauge-high"></i></div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-info">
+            <p>Risk Rating</p>
+            <div class="mt-1"><span id="recent-risk-badge" class="badge badge-risk-low">Evaluating</span></div>
+          </div>
+          <div class="metric-icon purple"><i class="fa-solid fa-shield-heart"></i></div>
+        </div>
+      </div>
+
+      <!-- Recent Screenings Table Card -->
+      <div class="result-card" style="padding: 1.5rem; margin-bottom: 2rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1.25rem;">
+          <h3 style="font-size: 1.3rem;"><i class="fa-solid fa-history" style="color: var(--primary);"></i> Recent Screening History</h3>
+          <a href="history.html" class="btn btn-sm btn-outline">View All History &rarr;</a>
+        </div>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Lesion Image & Disease</th>
+                <th>Risk Level</th>
+                <th>Confidence</th>
+                <th>Screening Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="recent-screenings-list">
+              <tr>
+                <td colspan="5" class="text-center" style="padding: 2rem; color: var(--slate-400);">Loading history data...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

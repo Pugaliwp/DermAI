@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DermAI - AI-Powered Skin Health Screening Portal</title>
+  <meta name="description" content="AI-powered preliminary skin disease screening and educational healthcare portal.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-notes-medical"></i></div>
+        <span>Derm<span style="color: var(--primary);">AI</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link active">Home</a></li>
+        <li><a href="#features" class="nav-link">Features</a></li>
+        <li><a href="#how-it-works" class="nav-link">How AI Works</a></li>
+        <li><a href="disease-info.html" class="nav-link">Disease Catalog</a></li>
+        <li><a href="#about" class="nav-link">About Project</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions" id="nav-actions">
+        <!-- Injected dynamically via auth.js -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <span class="badge badge-primary mb-2"><i class="fa-solid fa-wand-magic-sparkles"></i> Advanced Neural Screening</span>
+        <h1>AI-Powered Early <span>Skin Disease</span> Detection</h1>
+        <p class="hero-subtitle">
+          Upload skin lesion photos for instant preliminary AI predictions, detailed risk assessment, and educational medical guidance.
+        </p>
+        <div class="hero-cta">
+          <a href="upload.html" class="btn btn-lg btn-primary"><i class="fa-solid fa-camera"></i> Start Free Screening</a>
+          <a href="disease-info.html" class="btn btn-lg btn-secondary"><i class="fa-solid fa-book-medical"></i> Explore Diseases</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <h3>98.2%</h3>
+            <p>Model Precision Rate</p>
+          </div>
+          <div class="stat-item">
+            <h3>7+</h3>
+            <p>Skin Disease Classes</p>
+          </div>
+          <div class="stat-item">
+            <h3>&lt; 3 sec</h3>
+            <p>Instant Analysis</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <h4 style="display:flex; align-items:center; gap:0.5rem;"><i class="fa-solid fa-microscope" style="color: var(--primary);"></i> Live AI Telemetry</h4>
+          <span class="badge badge-risk-low"><i class="fa-solid fa-circle-check"></i> System Ready</span>
+        </div>
+
+        <div class="scanner-box">
+          <div class="scanner-line"></div>
+          <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80" class="scanner-image" alt="AI Scan Preview">
+          <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--slate-300);">Real-time feature map analysis (ABCDE criteria evaluation)</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Educational Disclaimer Banner -->
+  <div class="container">
+    <div class="disclaimer-banner">
+      <div class="disclaimer-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      <div class="disclaimer-text">
+        <strong>Educational Purpose Disclaimer:</strong>
+        This AI skin screening portal is designed strictly for preliminary educational and informational research purposes. It does <u>not</u> provide a definitive medical diagnosis and should never replace consultation with a qualified board-certified dermatologist or doctor.
+      </div>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="text-center mb-4">
+        <span class="badge badge-primary">Core Capabilities</span>
+        <h2 style="font-size: 2.3rem; margin-top: 0.5rem;">Why Choose DermAI Portal?</h2>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-brain"></i></div>
+          <h3>Deep Learning Analysis</h3>
+          <p>Trained on thousands of clinically validated dermoscopic images using convolutional neural networks to classify skin conditions.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+          <h3>Instant Result & Risk Tag</h3>
+          <p>Get immediate disease predictions complete with confidence percentages and color-coded risk levels (High, Moderate, Low).</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-file-pdf"></i></div>
+          <h3>Downloadable Reports</h3>
+          <p>Generate clean, downloadable PDF medical summary reports containing your screening results to share with your healthcare provider.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-user-shield"></i></div>
+          <h3>Secure History Tracking</h3>
+          <p>All user uploads and prediction histories are securely stored under JWT-encrypted user accounts with full history management.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How AI Works Section -->
+  <section class="section" id="how-it-works" style="background-color: var(--white); border-top: 1px solid var(--slate-200); border-bottom: 1px solid var(--slate-200);">
+    <div class="container">
+      <div class="text-center mb-4">
+        <span class="badge badge-primary">Workflow</span>
+        <h2 style="font-size: 2.3rem; margin-top: 0.5rem;">How The Screening Process Works</h2>
+      </div>
+
+      <div class="process-steps">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Upload Image</h3>
+          <p>Take a clear, close-up photo of the affected skin area (JPG, JPEG, PNG) and upload it.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Feature Extraction</h3>
+          <p>The Python FastAPI microservice extracts color distribution, asymmetry, border irregularity, and texture features.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>AI Prediction</h3>
+          <p>The neural network matches patterns against disease profiles (Melanoma, Eczema, Psoriasis, etc.).</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3>Report & Action</h3>
+          <p>View recommendations, review educational disease details, and export your PDF report.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Project Section -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <span class="badge badge-primary">About DermAI</span>
+          <h2 style="font-size: 2.2rem; margin-top: 0.5rem; margin-bottom: 1rem;">Empowering Early Skin Health Awareness</h2>
+          <p style="color: var(--slate-600); margin-bottom: 1rem;">
+            DermAI is an open full-stack web solution designed to bridge the gap between artificial intelligence and preliminary medical triage. By using modern web architecture (Node.js Express backend, Python FastAPI AI engine, and MySQL storage), it demonstrates how AI can democratize health awareness.
+          </p>
+          <ul style="list-style: none; display:flex; flex-direction:column; gap:0.75rem; font-weight:600; color: var(--slate-700);">
+            <li><i class="fa-solid fa-circle-check" style="color: var(--primary);"></i> Modular MVC Architecture</li>
+            <li><i class="fa-solid fa-circle-check" style="color: var(--primary);"></i> Strict Data Validation & Encryption</li>
+            <li><i class="fa-solid fa-circle-check" style="color: var(--primary);"></i> Comprehensive Admin Analytics & Control</li>
+          </ul>
+        </div>
+        <div>
+          <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=700&q=80" style="border-radius: var(--radius-xl); box-shadow: var(--shadow-lg);" alt="Medical Doctor & AI Technology">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section" id="contact" style="background-color: var(--white); border-top: 1px solid var(--slate-200);">
+    <div class="container">
+      <div class="text-center mb-4">
+        <span class="badge badge-primary">Get In Touch</span>
+        <h2 style="font-size: 2.2rem; margin-top: 0.5rem;">Have Questions or Feedback?</h2>
+      </div>
+
+      <div style="max-width: 600px; margin: 0 auto; background: var(--light-bg); padding: 2.5rem; border-radius: var(--radius-xl); border: 1px solid var(--slate-200);">
+        <form onsubmit="event.preventDefault(); Utils.showAlert('Thank you for your message!', 'success');">
+          <div class="form-group">
+            <label class="form-label">Your Name</label>
+            <input type="text" class="form-control" placeholder="John Doe" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-control" placeholder="john@example.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea class="form-control" rows="4" placeholder="How can we help you?" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3><i class="fa-solid fa-notes-medical" style="color: var(--secondary);"></i> DermAI Portal</h3>
+          <p style="color: var(--slate-400); font-size: 0.9rem; margin-top: 0.5rem;">
+            Educational AI-assisted skin health screening platform. Built for accessible health telemetry & preliminary awareness.
+          </p>
+        </div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="upload.html">AI Screening</a></li>
+            <li><a href="disease-info.html">Disease Catalog</a></li>
+            <li><a href="login.html">Sign In</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Account</h4>
+          <ul>
+            <li><a href="dashboard.html">User Dashboard</a></li>
+            <li><a href="history.html">Screening History</a></li>
+            <li><a href="profile.html">My Profile</a></li>
+            <li><a href="admin.html">Admin Portal</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4>Legal & Safety</h4>
+          <ul>
+            <li><a href="#">Medical Disclaimer</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 AI Skin Health Screening Portal. Educational Purpose Only. Not for clinical diagnosis.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

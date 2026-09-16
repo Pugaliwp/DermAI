@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Screening History - DermAI Portal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="navbar">
+    <div class="container-fluid">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-notes-medical"></i></div>
+        <span>Derm<span style="color: var(--primary);">AI</span> Portal</span>
+      </a>
+      <div class="nav-actions" id="nav-actions"></div>
+    </div>
+  </nav>
+
+  <!-- App Layout -->
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <ul class="sidebar-menu">
+        <li><a href="dashboard.html" class="sidebar-link"><i class="fa-solid fa-chart-pie"></i> Dashboard Overview</a></li>
+        <li><a href="upload.html" class="sidebar-link"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Skin Scan</a></li>
+        <li><a href="history.html" class="sidebar-link active"><i class="fa-solid fa-clock-rotate-left"></i> Screening History</a></li>
+        <li><a href="disease-info.html" class="sidebar-link"><i class="fa-solid fa-book-medical"></i> Disease Library</a></li>
+        <li><a href="profile.html" class="sidebar-link"><i class="fa-solid fa-user-gear"></i> Account Profile</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="dashboard-header">
+        <div>
+          <h1 style="font-size: 1.8rem;">Screening History Log</h1>
+          <p style="color: var(--slate-500); font-size: 0.95rem;">Review past skin image scans, AI classifications, and diagnostic recommendations.</p>
+        </div>
+        <a href="upload.html" class="btn btn-primary"><i class="fa-solid fa-plus"></i> New Screening</a>
+      </div>
+
+      <!-- Search & Filter Bar -->
+      <div class="result-card" style="padding: 1.25rem 1.5rem; margin-bottom: 1.5rem;">
+        <div style="display:flex; gap: 1rem; align-items:center;">
+          <i class="fa-solid fa-magnifying-glass" style="color: var(--slate-400);"></i>
+          <input type="text" id="history-search" class="form-control" placeholder="Search history by disease name or risk level..." style="border:none; padding: 0.4rem; background:transparent;">
+        </div>
+      </div>
+
+      <!-- History Table Card -->
+      <div class="result-card" style="padding: 1.5rem;">
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Lesion Image</th>
+                <th>AI Prediction</th>
+                <th>Confidence</th>
+                <th>Risk Assessment</th>
+                <th>Scan Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="history-table-body">
+              <tr>
+                <td colspan="7" class="text-center" style="padding: 2rem; color: var(--slate-400);">Loading history records...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/history.js"></script>
+</body>
+</html>

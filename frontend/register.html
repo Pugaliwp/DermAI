@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - DermAI Skin Health Portal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-notes-medical"></i></div>
+        <span>Derm<span style="color: var(--primary);">AI</span></span>
+      </a>
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-sm btn-outline">Already Have Account? Sign In</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Register Form -->
+  <main class="auth-container">
+    <div class="auth-card">
+      <div class="text-center mb-4">
+        <div class="logo-icon" style="margin: 0 auto 1rem; width: 56px; height: 56px; font-size: 1.8rem; background: linear-gradient(135deg, var(--secondary), var(--accent));">
+          <i class="fa-solid fa-user-plus"></i>
+        </div>
+        <h2>Create Account</h2>
+        <p style="color: var(--slate-500); font-size: 0.9rem;">Register to save and track your skin screening history</p>
+      </div>
+
+      <form id="register-form">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input type="text" id="full_name" class="form-control" placeholder="John Doe" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" id="email" class="form-control" placeholder="john@example.com" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Phone Number (Optional)</label>
+          <input type="tel" id="phone" class="form-control" placeholder="+1 (555) 000-0000">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Confirm Password</label>
+          <input type="password" id="confirm_password" class="form-control" placeholder="••••••••" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg"><i class="fa-solid fa-user-check"></i> Register Account</button>
+      </form>
+
+      <div class="text-center mt-3" style="font-size: 0.9rem; color: var(--slate-600);">
+        Already registered? <a href="login.html" style="font-weight:700;">Sign In</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

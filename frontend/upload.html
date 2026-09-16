@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Image - DermAI Portal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="navbar">
+    <div class="container-fluid">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-notes-medical"></i></div>
+        <span>Derm<span style="color: var(--primary);">AI</span> Portal</span>
+      </a>
+      <div class="nav-actions" id="nav-actions"></div>
+    </div>
+  </nav>
+
+  <!-- App Layout -->
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <ul class="sidebar-menu">
+        <li><a href="dashboard.html" class="sidebar-link"><i class="fa-solid fa-chart-pie"></i> Dashboard Overview</a></li>
+        <li><a href="upload.html" class="sidebar-link active"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Skin Scan</a></li>
+        <li><a href="history.html" class="sidebar-link"><i class="fa-solid fa-clock-rotate-left"></i> Screening History</a></li>
+        <li><a href="disease-info.html" class="sidebar-link"><i class="fa-solid fa-book-medical"></i> Disease Library</a></li>
+        <li><a href="profile.html" class="sidebar-link"><i class="fa-solid fa-user-gear"></i> Account Profile</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="dashboard-header">
+        <div>
+          <h1 style="font-size: 1.8rem;">Upload Skin Lesion Image</h1>
+          <p style="color: var(--slate-500); font-size: 0.95rem;">Select or drop a clear photo of the skin condition for preliminary AI analysis.</p>
+        </div>
+      </div>
+
+      <!-- Disclaimer Banner -->
+      <div class="disclaimer-banner" style="margin-top: 0;">
+        <div class="disclaimer-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        <div class="disclaimer-text">
+          <strong>Important Instructions:</strong>
+          Ensure the image is well-lit, in focus, and centered on the affected lesion. Allowed formats: <strong>JPG, JPEG, PNG</strong> (Max file size: <strong>5MB</strong>).
+        </div>
+      </div>
+
+      <!-- Upload Container Card -->
+      <div class="result-card" style="padding: 2.5rem; max-width: 800px; margin: 0 auto;">
+        
+        <!-- Drag and Drop Zone -->
+        <div class="upload-zone" id="upload-dropzone">
+          <input type="file" id="skin-image-input" accept="image/jpeg, image/jpg, image/png" style="display: none;">
+          <div class="upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+          <h3 style="margin-bottom: 0.5rem; color: var(--dark-navy);">Drag & Drop Your Image Here</h3>
+          <p style="color: var(--slate-500); font-size: 0.95rem; margin-bottom: 1.5rem;">or click to browse local files from your device</p>
+          <span class="btn btn-secondary btn-sm"><i class="fa-solid fa-folder-open"></i> Browse File</span>
+        </div>
+
+        <!-- Preview & Action Container -->
+        <div class="preview-container" id="preview-container">
+          <h4 style="margin-bottom: 1rem; color: var(--slate-700);">Selected Image Preview</h4>
+          <div class="image-preview-wrapper">
+            <img id="image-preview" src="" alt="Selected Lesion Preview">
+          </div>
+
+          <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
+            <button id="cancel-preview-btn" class="btn btn-outline"><i class="fa-solid fa-xmark"></i> Choose Another Image</button>
+            <button id="analyze-btn" class="btn btn-primary btn-lg"><i class="fa-solid fa-wand-magic-sparkles"></i> Run AI Telemetry Scan</button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- AI Scanning Overlay Loader Modal -->
+  <div class="scan-overlay" id="scan-overlay">
+    <div class="scan-spinner"></div>
+    <h2 style="color: var(--white); margin-bottom: 0.5rem; font-size: 1.8rem;">AI Analysis In Progress</h2>
+    <p id="scan-status-text" style="color: var(--slate-300); font-size: 1.05rem;">Processing skin lesion telemetry...</p>
+    <div style="margin-top: 2rem; background: rgba(255,255,255,0.1); padding: 0.75rem 1.5rem; border-radius: 50px; font-size: 0.85rem; color: var(--primary-light);">
+      <i class="fa-solid fa-spin fa-gear"></i> Convolutional Neural Network Feature Extraction
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/upload.js"></script>
+</body>
+</html>

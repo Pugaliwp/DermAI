@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disease Library - DermAI Portal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Top Navbar -->
+  <nav class="navbar">
+    <div class="container-fluid">
+      <a href="index.html" class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-notes-medical"></i></div>
+        <span>Derm<span style="color: var(--primary);">AI</span> Portal</span>
+      </a>
+      <div class="nav-actions" id="nav-actions"></div>
+    </div>
+  </nav>
+
+  <!-- App Layout -->
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <ul class="sidebar-menu">
+        <li><a href="dashboard.html" class="sidebar-link"><i class="fa-solid fa-chart-pie"></i> Dashboard Overview</a></li>
+        <li><a href="upload.html" class="sidebar-link"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Skin Scan</a></li>
+        <li><a href="history.html" class="sidebar-link"><i class="fa-solid fa-clock-rotate-left"></i> Screening History</a></li>
+        <li><a href="disease-info.html" class="sidebar-link active"><i class="fa-solid fa-book-medical"></i> Disease Library</a></li>
+        <li><a href="profile.html" class="sidebar-link"><i class="fa-solid fa-user-gear"></i> Account Profile</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="dashboard-header">
+        <div>
+          <h1 style="font-size: 1.8rem;">Dermatological Disease Reference Directory</h1>
+          <p style="color: var(--slate-500); font-size: 0.95rem;">Comprehensive medical educational information on common skin diseases, symptoms, and risk levels.</p>
+        </div>
+      </div>
+
+      <!-- Educational Disclaimer Banner -->
+      <div class="disclaimer-banner" style="margin-top: 0;">
+        <div class="disclaimer-icon"><i class="fa-solid fa-circle-info"></i></div>
+        <div class="disclaimer-text">
+          <strong>Educational Reference:</strong>
+          This information catalog is curated for educational awareness. Always speak to a dermatologist if you notice changing moles, persistent rashes, or abnormal skin growths.
+        </div>
+      </div>
+
+      <!-- Disease Cards Grid -->
+      <div class="features-grid" id="disease-grid">
+        <div class="text-center" style="grid-column: 1/-1; padding: 3rem; color: var(--slate-400);">Loading disease database...</div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/disease-info.js"></script>
+</body>
+</html>
