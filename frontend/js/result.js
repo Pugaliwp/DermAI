@@ -25,10 +25,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function fetchScreeningDetail(id) {
   try {
-    const token = Utils.getToken();
-    const response = await fetch(`${CONFIG.API_BASE_URL}/screening/${id}`, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
+    const response = await Utils.fetchWithAuth(`/screening/${id}`);
 
     if (!response.ok) throw new Error('Could not fetch screening result');
     const result = await response.json();
@@ -153,9 +150,7 @@ function setupPDFDownload(screeningId) {
       downloadBtn.disabled = true;
       downloadBtn.textContent = 'Generating PDF...';
 
-      const response = await fetch(`${CONFIG.API_BASE_URL}/screening/report/${currentId}`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
+      const response = await Utils.fetchWithAuth(`/screening/report/${currentId}`);
 
       if (!response.ok) throw new Error('PDF Generation failed.');
 

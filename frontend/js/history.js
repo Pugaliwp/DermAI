@@ -13,17 +13,20 @@ let allHistoryItems = [];
 
 async function loadScreeningHistory() {
   try {
-    const token = Utils.getToken();
-    const response = await fetch(`${CONFIG.API_BASE_URL}/screening/user-screenings`, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
+    const response = await Utils.fetchWithAuth('/screening/user-screenings');
 
     if (!response.ok) throw new Error('Failed to load history');
     allHistoryItems = await response.json();
     renderHistoryTable(allHistoryItems);
 
   } catch (err) {
-    Utils.showAlert(err.message);
+    const container = document.getElementById('history-table-body');
+    if (container) {
+      container.innerHTML = `<tr><td colspan="7" class="text-center" style="padding: 2.5rem; color: #ef4444;">Failed to load records. ${err.message}</td></tr>`;
+    }
+    if (err.message !== 'Session expired') {
+      Utils.showAlert(err.message);
+    }
   }
 }
 
@@ -44,7 +47,7 @@ function renderHistoryTable(items) {
              style="width: 54px; height: 54px; border-radius: 10px; object-fit: cover; border: 1px solid var(--slate-200);" alt="Skin Scan"/>
       </td>
       <td><strong style="color: var(--dark-navy); font-size: 1rem;">${item.prediction}</strong></td>
-      <td><strong>${item.confidence}%</strong></td>
+      <td><strong>${Utils.formatConfidence(item.confidence)}</strong></td>
       <td><span class="badge badge-risk-${(item.risk_level || 'low').toLowerCase()}">${item.risk_level || 'Low'} Risk</span></td>
       <td>${Utils.formatDate(item.created_at)}</td>
       <td>
@@ -75,10 +78,8 @@ async function deleteScreeningRecord(id) {
   if (!confirm('Are you sure you want to delete this screening record?')) return;
 
   try {
-    const token = Utils.getToken();
-    const response = await fetch(`${CONFIG.API_BASE_URL}/screening/${id}`, {
-      method: 'DELETE',
-      headers: { 'Authorization': `Bearer ${token}` }
+    const response = await Utils.fetchWithAuth(`/screening/${id}`, {
+      method: 'DELETE'
     });
 
     if (!response.ok) throw new Error('Failed to delete record.');

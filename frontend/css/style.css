@@ -568,6 +568,10 @@ img {
   flex-direction: column;
   gap: 0.5rem;
   flex-shrink: 0;
+  position: sticky;
+  top: 75px;
+  height: calc(100vh - 75px);
+  overflow-y: auto;
 }
 
 .sidebar-menu {

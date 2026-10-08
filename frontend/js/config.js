@@ -41,6 +41,15 @@ const Utils = {
     });
   },
 
+  formatConfidence: (conf) => {
+    const val = parseFloat(conf);
+    if (isNaN(val)) return '0.00%';
+    if (val <= 1.0) {
+      return (val * 100).toFixed(2) + '%';
+    }
+    return val.toFixed(2) + '%';
+  },
+
   showAlert: (message, type = 'error') => {
     const alertBox = document.createElement('div');
     alertBox.className = `alert alert-${type}`;
@@ -62,5 +71,31 @@ const Utils = {
     setTimeout(() => {
       alertBox.remove();
     }, 4000);
+  },
+
+  getAuthHeaders: () => {
+    const token = Utils.getToken();
+    return {
+      'Authorization': `Bearer ${token}`
+    };
+  },
+
+  fetchWithAuth: async (endpoint, options = {}) => {
+    const headers = { ...options.headers, ...Utils.getAuthHeaders() };
+    const response = await fetch(`${CONFIG.API_BASE_URL}${endpoint}`, {
+      ...options,
+      headers
+    });
+
+    if (response.status === 401 || response.status === 403) {
+      Utils.clearSession();
+      Utils.showAlert('Session expired or invalid. Please sign in again.');
+      setTimeout(() => {
+        window.location.href = 'login.html';
+      }, 1500);
+      throw new Error('Session expired');
+    }
+
+    return response;
   }
 };

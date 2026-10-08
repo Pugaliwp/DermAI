@@ -10,10 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function loadAdminDashboard() {
   try {
-    const token = Utils.getToken();
-    const response = await fetch(`${CONFIG.API_BASE_URL}/admin/stats`, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
+    const response = await Utils.fetchWithAuth('/admin/stats');
 
     if (!response.ok) throw new Error('Failed to load admin analytics data.');
     const data = await response.json();
@@ -69,7 +66,7 @@ function renderAdminScreeningsTable(screenings) {
       <td>#${s.screening_id}</td>
       <td>User #${s.user_id} (${s.full_name || 'Patient'})</td>
       <td><strong>${s.prediction}</strong></td>
-      <td><strong>${s.confidence}%</strong></td>
+      <td><strong>${Utils.formatConfidence(s.confidence)}</strong></td>
       <td><span class="badge badge-risk-${(s.risk_level || 'low').toLowerCase()}">${s.risk_level || 'Low'} Risk</span></td>
       <td>${Utils.formatDate(s.created_at)}</td>
       <td>
@@ -134,10 +131,8 @@ async function deleteScreeningAsAdmin(id) {
   if (!confirm(`Admin Confirmation: Delete screening #${id}?`)) return;
 
   try {
-    const token = Utils.getToken();
-    const response = await fetch(`${CONFIG.API_BASE_URL}/admin/screening/${id}`, {
-      method: 'DELETE',
-      headers: { 'Authorization': `Bearer ${token}` }
+    const response = await Utils.fetchWithAuth(`/admin/screening/${id}`, {
+      method: 'DELETE'
     });
 
     if (!response.ok) throw new Error('Admin delete action failed.');

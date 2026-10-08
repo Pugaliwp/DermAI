@@ -33,12 +33,10 @@ function setupProfileForm() {
     const password = document.getElementById('profile-password').value;
 
     try {
-      const token = Utils.getToken();
-      const response = await fetch(`${CONFIG.API_BASE_URL}/auth/profile`, {
+      const response = await Utils.fetchWithAuth('/auth/profile', {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({ full_name, phone, password: password || undefined })
       });

@@ -103,22 +103,21 @@ disease_names = {
 clip_model = None
 clip_processor = None
 POSITIVE_PROMPTS = [
-    "a close-up clinical photograph of a human skin lesion",
-    "a dermoscopic photograph of a human skin lesion",
-    "a close-up photograph of a mole on human skin",
-    "a close-up photograph of an abnormal lesion on human body skin"
+    "dermoscopic image of a skin lesion",
+    "clinical photograph of a skin lesion",
+    "dermoscopy photograph of a mole",
+    "dermoscopic photograph of abnormal skin lesion"
 ]
 NEGATIVE_PROMPTS = [
-    "a portrait of a person",
-    "normal human skin without a lesion",
-    "a plant or leaf",
-    "an animal",
-    "a landscape",
-    "a road or vehicle",
-    "an everyday object",
-    "a screenshot or text",
-    "a medical illustration",
-    "a microscope or histology image"
+    "portrait",
+    "normal human skin without lesion",
+    "plant or leaf",
+    "animal",
+    "vehicle or road",
+    "everyday object",
+    "screenshot",
+    "medical illustration",
+    "histology/microscopy image"
 ]
 CLIP_PROMPTS = POSITIVE_PROMPTS + NEGATIVE_PROMPTS
 
@@ -186,12 +185,26 @@ async def predict(file: UploadFile = File(None)):
             
         skin_score = sum(clip_probs[:len(POSITIVE_PROMPTS)])
         
-        # Strict threshold from OOD calibration (0.93 allows dermoscopic but rejects histology)
-        if skin_score < 0.93:
+        # DIAGNOSTIC LOGGING
+        print("--- CLIP OOD GATE DIAGNOSTICS ---")
+        for i, prompt in enumerate(CLIP_PROMPTS):
+            score_type = "POS" if i < len(POSITIVE_PROMPTS) else "NEG"
+            print(f"[{score_type}] {prompt}: {clip_probs[i]:.4f}")
+        print(f"Aggregated POS score: {skin_score:.4f}")
+        neg_score = sum(clip_probs[len(POSITIVE_PROMPTS):])
+        print(f"Aggregated NEG score: {neg_score:.4f}")
+        print(f"Threshold: 0.85")
+        decision = "ACCEPT" if skin_score >= 0.85 else "REJECT"
+        print(f"Decision: {decision}")
+        print("---------------------------------")
+        
+        # Strict threshold from OOD calibration (0.85 allows dermoscopic but rejects histology)
+        if skin_score < 0.85:
             return JSONResponse(content={
                 "accepted": False,
                 "error_code": "INVALID_IMAGE_TYPE",
-                "message": "Please upload a clear close-up photograph of a skin lesion on human skin."
+                "message": "Please upload a clear close-up photograph of a skin lesion on human skin.",
+                "skin_score": float(skin_score)
             })
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"OOD validation error: {str(e)}")
@@ -214,10 +227,12 @@ async def predict(file: UploadFile = File(None)):
     probs_dict = {class_names[i]: float(probabilities[i]) for i in range(len(class_names))}
     
     return JSONResponse(content={
+        "accepted": True,
         "predicted_class_code": pred_class_code,
         "disease_name": disease_names[pred_class_code],
         "confidence": float(confidence),
         "probabilities": probs_dict,
         "model_name": "DermAI Hybrid V1",
-        "device": str(device)
+        "device": str(device),
+        "skin_score": float(skin_score)
     })

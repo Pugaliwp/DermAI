@@ -4,7 +4,7 @@ const fs = require('fs');
 const FormData = require('form-data');
 const { generateScreeningPDF } = require('../utils/pdfGenerator');
 
-const AI_SERVICE_URL = process.env.AI_SERVICE_URL || 'http://localhost:8000';
+const AI_SERVICE_URL = process.env.AI_SERVICE_URL || 'http://localhost:8080';
 
 // Handle Image Upload & AI Service Forwarding
 exports.uploadAndScreen = async (req, res) => {
@@ -23,20 +23,20 @@ exports.uploadAndScreen = async (req, res) => {
 
     // Call Python FastAPI microservice
     try {
-      console.log('[SCREENING] Calling FastAPI at', `${AI_SERVICE_URL}/predict`);
+      console.log('[AI] Calling FastAPI:', `${AI_SERVICE_URL}/predict`);
       const formData = new FormData();
       formData.append('file', fs.createReadStream(fullFilePath));
 
       const aiResponse = await axios.post(`${AI_SERVICE_URL}/predict`, formData, {
         headers: formData.getHeaders(),
-        timeout: 8000
+        timeout: 30000
       });
 
-      console.log('[SCREENING] FastAPI response status:', aiResponse.status);
+      console.log('[AI] FastAPI response status:', aiResponse.status);
       aiResult = aiResponse.data;
-      console.log('[SCREENING] FastAPI accepted:', aiResult.accepted);
+      console.log('[AI] FastAPI accepted:', aiResult.accepted);
       if (aiResult.model_name) {
-        console.log('[SCREENING] FastAPI model name:', aiResult.model_name);
+        console.log('[AI] FastAPI model name:', aiResult.model_name);
       }
       
       // Fetch risk level and recommendation from DB
@@ -58,8 +58,11 @@ exports.uploadAndScreen = async (req, res) => {
       }
 
     } catch (aiErr) {
-      console.log('[SCREENING] FastAPI error:', aiErr.message);
-      console.error('⚠️ Python AI FastAPI service error:', aiErr.message);
+      console.error('[AI] FastAPI error:', aiErr.message);
+      if (aiErr.response) {
+        console.error('[AI] FastAPI response status:', aiErr.response.status);
+        console.error('[AI] FastAPI response body:', aiErr.response.data);
+      }
       return res.status(503).json({ 
         message: 'AI screening service is currently unavailable. Please try again later.' 
       });

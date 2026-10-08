@@ -38,3 +38,6 @@ ai-service/test_results/
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Uploads
+backend/uploads/

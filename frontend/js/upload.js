@@ -114,12 +114,8 @@ async function submitScreeningImage(file) {
   formData.append('image', file);
 
   try {
-    const token = Utils.getToken();
-    const response = await fetch(`${CONFIG.API_BASE_URL}/screening/upload`, {
+    const response = await Utils.fetchWithAuth('/screening/upload', {
       method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      },
       body: formData
     });
 

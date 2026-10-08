@@ -13,10 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 async function loadDashboardData() {
   try {
-    const token = Utils.getToken();
-    const res = await fetch(`${CONFIG.API_BASE_URL}/screening/user-screenings`, {
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
+    const res = await Utils.fetchWithAuth('/screening/user-screenings');
 
     if (!res.ok) throw new Error('Failed to load dashboard data');
     const screenings = await res.json();
@@ -27,8 +24,9 @@ async function loadDashboardData() {
     if (screenings.length > 0) {
       const recent = screenings[0];
       document.getElementById('recent-disease-name').textContent = recent.prediction;
-      document.getElementById('recent-confidence').textContent = `${recent.confidence}%`;
-      document.getElementById('recent-date').textContent = Utils.formatDate(recent.created_at);
+      document.getElementById('recent-confidence').textContent = Utils.formatConfidence(recent.confidence);
+      const recentDateElem = document.getElementById('recent-date');
+      if (recentDateElem) recentDateElem.textContent = Utils.formatDate(recent.created_at);
       
       const riskBadge = document.getElementById('recent-risk-badge');
       riskBadge.textContent = recent.risk_level || 'Evaluated';
@@ -36,7 +34,8 @@ async function loadDashboardData() {
     } else {
       document.getElementById('recent-disease-name').textContent = 'No Screenings Yet';
       document.getElementById('recent-confidence').textContent = '--';
-      document.getElementById('recent-date').textContent = 'N/A';
+      const recentDateElem = document.getElementById('recent-date');
+      if (recentDateElem) recentDateElem.textContent = 'N/A';
     }
 
     // Populate recent screenings table
@@ -61,7 +60,7 @@ async function loadDashboardData() {
               ${item.risk_level || 'Low'}
             </span>
           </td>
-          <td><strong>${item.confidence}%</strong></td>
+          <td><strong>${Utils.formatConfidence(item.confidence)}</strong></td>
           <td>${Utils.formatDate(item.created_at)}</td>
           <td>
             <button onclick="viewResultDetail(${item.screening_id})" class="btn btn-sm btn-outline">View Result</button>
@@ -72,6 +71,20 @@ async function loadDashboardData() {
 
   } catch (err) {
     console.error('Error loading dashboard:', err);
+    document.getElementById('total-screenings-count').textContent = 'Error';
+    document.getElementById('recent-disease-name').textContent = 'Error loading data';
+    document.getElementById('recent-confidence').textContent = '--';
+    const recentDateElem = document.getElementById('recent-date');
+    if (recentDateElem) recentDateElem.textContent = 'N/A';
+    const riskBadge = document.getElementById('recent-risk-badge');
+    if (riskBadge) {
+      riskBadge.textContent = 'Error';
+      riskBadge.className = 'badge badge-risk-high';
+    }
+    const tableBody = document.getElementById('recent-screenings-list');
+    if (tableBody) {
+      tableBody.innerHTML = `<tr><td colspan="5" class="text-center" style="padding: 2rem; color: #ef4444;">Failed to load data. ${err.message}</td></tr>`;
+    }
   }
 }
 
